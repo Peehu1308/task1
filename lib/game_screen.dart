@@ -13,10 +13,8 @@ class _GameScreenState extends State<GameScreen> {
   String _computerChoice = '';
   String _result = '';
 
-  
   final List<String> _choices = ['Rock', 'Paper', 'Scissors'];
 
-  
   void _makeComputerChoice() {
     final random = Random();
     _computerChoice = _choices[random.nextInt(_choices.length)];
@@ -27,8 +25,8 @@ class _GameScreenState extends State<GameScreen> {
     if (_playerChoice == _computerChoice) {
       _result = "It's a draw!";
     } else if ((_playerChoice == 'Rock' && _computerChoice == 'Scissors') ||
-               (_playerChoice == 'Paper' && _computerChoice == 'Rock') ||
-               (_playerChoice == 'Scissors' && _computerChoice == 'Paper')) {
+        (_playerChoice == 'Paper' && _computerChoice == 'Rock') ||
+        (_playerChoice == 'Scissors' && _computerChoice == 'Paper')) {
       _result = 'You win!';
     } else {
       _result = 'You lose!';
@@ -42,6 +40,20 @@ class _GameScreenState extends State<GameScreen> {
       _makeComputerChoice();
       _determineResult();
     });
+  }
+
+// IMAGES PORTION
+  String _getImages(String choice) {
+    switch (choice) {
+      case 'Rock':
+        return 'images/rock_btn.png';
+      case 'Paper':
+        return 'images/paper_btn.png';
+      case 'Scissors':
+        return 'images/scisor_btn.png';
+      default:
+        return '';
+    }
   }
 
   @override
@@ -84,7 +96,7 @@ class _GameScreenState extends State<GameScreen> {
                 ),
                 const SizedBox(width: 20),
 
-                // Paper 
+                // Paper
                 Flexible(
                   child: InkWell(
                     onTap: () => _onPlayerChoice('Paper'),
@@ -114,16 +126,27 @@ class _GameScreenState extends State<GameScreen> {
             ),
             const SizedBox(height: 50),
 
-            
             if (_playerChoice.isNotEmpty) ...[
               Text(
                 'Your choice: $_playerChoice',
                 style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
+              Image.asset(
+                _getImages(_playerChoice),
+                width:80,
+                height:80,
+              ),
+              const SizedBox(height: 30,),
               Text(
                 'Computer\'s choice: $_computerChoice',
                 style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
+              Image.asset(
+                _getImages(_computerChoice),
+                width:80,
+                height:80,
+              ),
+              const SizedBox(height:30),
               Text(
                 _result,
                 style: const TextStyle(
@@ -145,7 +168,8 @@ class _GameScreenState extends State<GameScreen> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 backgroundColor: Colors.deepPurple,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

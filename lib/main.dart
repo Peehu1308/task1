@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(top: 30),
               child: Text(
                 'Rock Paper Scissor',
                 style: TextStyle(
